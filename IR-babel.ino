@@ -3,19 +3,15 @@
 
 #define IRSND_IR_FREQUENCY          38000
 
-
-#ifdef ARDUINO_AVR_ATTINYX5
-#define IRSND_OUTPUT_PIN 6
-#define IRMP_INPUT_PIN 8
-#else
-#define IRSND_OUTPUT_PIN 2
-#define IRMP_INPUT_PIN 0
-#define IRMP_FEEDBACK_LED_PIN 1
-#endif
+#define IRSND_OUTPUT_PIN 4
+#define IRMP_INPUT_PIN 2
+#define IRMP_FEEDBACK_LED_PIN 13
 
 #define USE_ONE_TIMER_FOR_IRMP_AND_IRSND
-#define IRMP_SUPPORT_NEC_PROTOCOL 1
+#define IRSND_SUPPORT_NEC_PROTOCOL 1
 
+#include <irmpSelectMain15Protocols.h>
+//#include <irsndSelectMain15Protocols.h>
 #include <irmp.hpp>
 #include <irsnd.hpp>
 
@@ -26,8 +22,7 @@ uint8_t mute_count;
 
 void setup() {
     // put your setup code here, to run once:
-    Serial.begin(19200);
- //   pinMode(8, INPUT);
+	Serial.begin(115200);
     irmp_init();
     irsnd_init();
     irmp_irsnd_LEDFeedback(true); 
